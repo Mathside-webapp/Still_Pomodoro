@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="Still — a calm, offline Pomodoro timer to help you stay focused.">
+  <title>Still — Your focus space</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Still">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.86 1.86-.06-.06A1.7 1.7 0 0 0 16 18.4a1.7 1.7 0 0 0-1.02 1.56V20h-2.63v-.04A1.7 1.7 0 0 0 10.8 18.4a1.7 1.7 0 0 0-1.88.34l-.06.06L7 16.94l.06-.06A1.7 1.7 0 0 0 7.4 15a1.7 1.7 0 0 0-1.56-1.02H5.8v-2.63h.04A1.7 1.7 0 0 0 7.4 9.8a1.7 1.7 0 0 0-.34-1.88L7 7.86 8.86 6l.06.06A1.7 1.7 0 0 0 10.8 6.4a1.7 1.7 0 0 0 1.02-1.56V4.8h2.63v.04A1.7 1.7 0 0 0 16 6.4a1.7 1.7 0 0 0 1.88-.34l.06-.06 1.86 1.86-.06.06A1.7 1.7 0 0 0 19.4 9.8a1.7 1.7 0 0 0 1.56 1.02H21v2.63h-.04A1.7 1.7 0 0 0 19.4 15Z" transform="translate(-1 -1)"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2.4 6.1M3 4v7h7"/></symbol>
+    <symbol id="i-skip" viewBox="0 0 24 24"><path d="m5 5 10 7-10 7V5Zm13 0v14"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-stopwatch" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13 15 10M12 2v3M9 2h6m4 3 2 2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v7m4-7v7M6 7l1 14h10l1-14M9 7V4h6v3"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11L4 20Z"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 17v3h16v-3"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Zm7 13 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="Still, home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>still<span class="brand-period">.</span></span>
+      </a>
+      <div class="header-actions">
+        <button class="install-trigger" id="installButton" type="button" title="Install Still or learn how to use it offline"><svg class="icon"><use href="#i-download"/></svg><span>Install app</span></button>
+        <button class="icon-button" id="themeButton" type="button" aria-label="Switch to dark mode" title="Change theme"><svg class="icon"><use href="#i-moon"/></svg></button>
+        <button class="icon-button" id="settingsButton" type="button" aria-label="Open settings" title="Settings"><svg class="icon"><use href="#i-settings"/></svg></button>
+      </div>
+    </header>
+
+    <main>
+      <div class="intro"><span class="eyebrow"><span class="eyebrow-dot"></span> YOUR LITTLE SPACE TO FOCUS</span><h1>Make room for <em>what matters.</em></h1><p>One thing at a time. One session at a time.</p></div>
+      <nav class="workspace-tabs" aria-label="Timer tools">
+        <button type="button" class="workspace-tab active" id="pomodoroView" aria-pressed="true"><svg class="icon"><use href="#i-sun"/></svg> Pomodoro</button>
+        <button type="button" class="workspace-tab" id="stopwatchView" aria-pressed="false"><svg class="icon"><use href="#i-stopwatch"/></svg> Stopwatch</button>
+      </nav>
+      <section class="routines-section" id="routinesSection" aria-labelledby="routinesTitle">
+        <div class="routines-heading"><div><span class="eyebrow eyebrow-quiet">YOUR OWN PACE</span><h2 id="routinesTitle">My sessions <span class="routine-count" id="routineCount">0</span></h2></div><button type="button" class="create-routine" id="newRoutineButton"><svg class="icon"><use href="#i-plus"/></svg> Create session</button></div>
+        <div class="routine-list" id="routineList" aria-label="Saved custom sessions"></div>
+      </section>
+      <section class="timer-card" id="timerCard" aria-label="Focus and stopwatch timers">
+        <div class="countdown-panel" id="countdownPanel">
+        <div class="custom-context" id="customContext" hidden>
+          <div class="custom-context-text"><span class="eyebrow eyebrow-quiet">CUSTOM SESSION</span><strong id="activeRoutineName">My focus session</strong><span id="customProgressNote">Session 1 of 1 · Timer 1 of 2</span></div>
+          <button class="exit-custom" id="exitCustom" type="button"><svg class="icon"><use href="#i-arrow-left"/></svg> Classic timer</button>
+        </div>
+        <div class="timer-tabs" id="classicTabs" role="tablist" aria-label="Timer mode">
+          <button class="timer-tab active" data-mode="focus" type="button" role="tab" aria-selected="true">Focus</button>
+          <button class="timer-tab" data-mode="short" type="button" role="tab" aria-selected="false">Short break</button>
+          <button class="timer-tab" data-mode="long" type="button" role="tab" aria-selected="false">Long break</button>
+        </div>
+
+        <div class="timer-center">
+          <div class="timer-ring" role="timer" aria-label="Time remaining" aria-live="off">
+            <svg class="ring-svg" viewBox="0 0 280 280" aria-hidden="true">
+              <circle class="ring-track" cx="140" cy="140" r="123"/>
+              <circle class="ring-progress" id="ringProgress" cx="140" cy="140" r="123"/>
+            </svg>
+            <div class="ring-content"><div class="ring-mode" id="ringMode">TIME TO FOCUS</div><div class="time-value" id="timeValue">25:00</div><div class="ring-hint" id="ringHint">You've got this.</div></div>
+          </div>
+          <div class="timer-controls">
+            <button class="control-secondary" id="resetButton" type="button" title="Reset timer (R)" aria-label="Reset timer"><svg class="icon"><use href="#i-reset"/></svg></button>
+            <button class="control-primary" id="startButton" type="button"><svg class="icon" id="startIcon"><use href="#i-play"/></svg><span id="startText">Start focus</span></button>
+            <button class="control-secondary" id="skipButton" type="button" title="Skip to next session" aria-label="Skip to next session"><svg class="icon"><use href="#i-skip"/></svg></button>
+          </div>
+          <p class="keyboard-tip">Press <kbd>Space</kbd> to start or pause</p>
+        </div>
+        <div class="timer-footer"><span id="sessionLabel">SESSION 1 OF 4</span><div class="session-pips" id="sessionPips" aria-label="Focus sessions until long break"><span class="pip active"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div></div>
+        <div class="custom-timeline" id="customTimeline" hidden><div class="timeline-heading"><span>YOUR TIMER LINEUP</span><button type="button" id="restartRoutineButton">Restart all sessions</button></div><div class="timeline-list" id="timelineList"></div></div>
+        </div>
+        <div class="stopwatch-panel" id="stopwatchPanel" hidden>
+          <div class="stopwatch-top"><span class="eyebrow eyebrow-quiet">A LITTLE TIME FOR YOURSELF</span><h2>Stopwatch</h2><p>Count up, take a lap, keep moving.</p></div>
+          <div class="stopwatch-face"><span class="stopwatch-time" id="stopwatchTime">00:00<span>.00</span></span><span class="stopwatch-state" id="stopwatchState">Ready when you are.</span></div>
+          <div class="timer-controls stopwatch-controls">
+            <button class="control-secondary" id="stopwatchReset" type="button" aria-label="Reset stopwatch" title="Reset stopwatch"><svg class="icon"><use href="#i-reset"/></svg></button>
+            <button class="control-primary" id="stopwatchToggle" type="button"><svg class="icon"><use href="#i-play"/></svg><span>Start</span></button>
+            <button class="control-secondary" id="stopwatchLap" type="button" title="Record lap" aria-label="Record lap" disabled><svg class="icon"><use href="#i-plus"/></svg></button>
+          </div>
+          <div class="lap-area"><div class="lap-heading"><span>YOUR LAPS</span><span id="lapCount">0 recorded</span></div><ol class="lap-list" id="lapList"><li class="lap-empty">Laps will appear here as you go.</li></ol></div>
+        </div>
+      </section>
+
+      <section class="lower-section" aria-label="Today's progress">
+        <div class="lower-heading"><div><span class="eyebrow eyebrow-quiet">SMALL STEPS ADD UP</span><h2>Today's progress</h2></div><span class="today-date" id="todayDate"></span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon peach"><svg class="icon"><use href="#i-check"/></svg></span><span class="stat-value" id="sessionsStat">0</span><span class="stat-label">Sessions completed</span></article>
+          <article class="stat-card"><span class="stat-icon lavender"><svg class="icon"><use href="#i-spark"/></svg></span><span class="stat-value"><span id="minutesStat">0</span><small>min</small></span><span class="stat-label">Time well spent</span></article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>Focus gently. Progress naturally.</span><span>Made for mindful moments <span aria-hidden="true">✳</span></span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="settingsModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" tabindex="-1">
+      <div class="modal-heading"><div><span class="eyebrow eyebrow-quiet">MAKE IT YOURS</span><h2 id="settingsTitle">Timer settings</h2></div><button id="closeSettings" class="icon-button" type="button" aria-label="Close settings"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <form id="settingsForm">
+        <div class="native-alarms" id="nativeAlarms" hidden><strong>Background alarms</strong><p id="nativeAlarmStatus">Android alerts keep working when Still is not visible.</p><button type="button" id="enableAlarmButton">Enable background alarms</button></div>
+        <div class="field-title">DURATIONS <span>IN MINUTES</span></div>
+        <div class="duration-grid"><label>Focus<input id="focusDuration" type="number" min="1" max="180" step="1" required></label><label>Short break<input id="shortDuration" type="number" min="1" max="60" step="1" required></label><label>Long break<input id="longDuration" type="number" min="1" max="120" step="1" required></label></div>
+        <label class="interval-row"><span><strong>Long break after</strong><small>Number of focus sessions</small></span><select id="longAfter"><option value="2">2 sessions</option><option value="3">3 sessions</option><option value="4">4 sessions</option><option value="5">5 sessions</option><option value="6">6 sessions</option><option value="8">8 sessions</option></select></label>
+        <label class="toggle-row"><span><strong>Play completion sounds</strong><small>Alert at the end of each countdown and custom timer</small></span><input type="checkbox" id="soundEnabled" class="toggle-input"><span class="toggle-switch" aria-hidden="true"></span></label>
+        <div class="alarm-picker" id="alarmPicker">
+          <div class="alarm-heading"><div><strong>Completion sound</strong><small>Pick one of 10 sounds. Preview it before saving.</small></div><span class="sound-count">10 sounds</span></div>
+          <div class="alarm-picker-row"><select id="alarmSound" aria-label="Choose completion sound">
+            <option value="gentle">01 · Gentle chime</option>
+            <option value="bell">02 · Bell tower</option>
+            <option value="marimba">03 · Soft marimba</option>
+            <option value="digital">04 · Digital ping</option>
+            <option value="sunrise">05 · Sunrise melody</option>
+            <option value="crystal">06 · Crystal notes</option>
+            <option value="classic">07 · Classic alarm</option>
+            <option value="ocean">08 · Ocean drops</option>
+            <option value="retro">09 · Retro beeps</option>
+            <option value="celebrate">10 · Celebration</option>
+          </select><button type="button" id="previewSound" class="sound-preview"><svg class="icon"><use href="#i-play"/></svg><span>Preview</span></button></div>
+        </div>
+        <label class="toggle-row"><span><strong>Auto-start next session</strong><small>Move into breaks and focus automatically</small></span><input type="checkbox" id="autoStart" class="toggle-input"><span class="toggle-switch" aria-hidden="true"></span></label>
+        <p class="settings-note">Every completed countdown plays the selected sound, including custom timers. You can also pick a different sound for each custom timer. Keep the page open and allow browser audio for reliable alerts. Changing the duration of an active countdown will ask for confirmation before restarting it. Everything is saved on this device.</p>
+        <button class="save-button" type="submit">Save changes <svg class="icon"><use href="#i-check"/></svg></button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="routineModal" hidden>
+    <div class="modal routine-modal" role="dialog" aria-modal="true" aria-labelledby="routineTitle" tabindex="-1">
+      <div class="modal-heading"><div><span class="eyebrow eyebrow-quiet">DESIGN YOUR DAY</span><h2 id="routineTitle">Create a session</h2><p class="modal-subtitle">Choose how many timers and how many times to repeat them.</p></div><button id="closeRoutine" class="icon-button" type="button" aria-label="Close session editor"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <form id="routineForm">
+        <label class="routine-field">Session name <input type="text" id="routineName" maxlength="45" placeholder="e.g. Deep work" required></label>
+        <div class="routine-numbers">
+          <label class="routine-field">Timers per session <input type="number" id="timerCount" min="1" max="12" step="1" value="2" required></label>
+          <label class="routine-field">Number of sessions <input type="number" id="roundCount" min="1" max="20" step="1" value="4" required></label>
+        </div>
+        <div class="field-title lineup-label">CUSTOMIZE EACH TIMER <span>IN MINUTES</span></div>
+        <div id="timerEditorList" class="timer-editor-list"></div>
+        <div class="routine-summary" id="routineEstimate">Total planned time: 120 minutes</div>
+        <p class="settings-note">Each session plays the timers in order. When they finish, your next session begins with timer 1. You can pause between timers or enable auto-start in settings.</p>
+        <button class="save-button" type="submit"><svg class="icon"><use href="#i-check"/></svg> <span id="saveRoutineLabel">Save and start session</span></button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="confirmModal" hidden><div class="modal confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmDescription">
+      <div class="modal-heading"><div><span class="eyebrow eyebrow-quiet">DOUBLE CHECK</span><h2 id="confirmTitle">Delete this session?</h2></div><button class="icon-button" id="closeConfirm" type="button" aria-label="Cancel deletion"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <p id="confirmDescription">This saved session will be removed from this device.</p><div class="confirm-buttons"><button id="cancelDelete" type="button" class="plain-button">Keep it</button><button id="confirmDelete" type="button" class="danger-button">Delete session</button></div>
+    </div></div>
+  <div class="modal-backdrop" id="switchTimerModal" hidden>
+    <div class="modal confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="switchTimerTitle" aria-describedby="switchTimerDescription" tabindex="-1">
+      <div class="modal-heading"><div><span class="eyebrow eyebrow-quiet">TIMER ALREADY ACTIVE</span><h2 id="switchTimerTitle">A timer is already running</h2></div><button class="icon-button" id="closeSwitchTimer" type="button" aria-label="Keep current timer"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <p id="switchTimerDescription">You have time remaining on your current timer. Do you want to start another timer?</p>
+      <div class="running-preview" id="activeTimerPreview"><span class="running-dot"></span><span id="runningTimerLabel">Focus</span><strong id="runningTimeLeft">25:00 left</strong></div>
+      <p class="replace-note">Starting a new timer will discard the remaining time on this one.</p>
+      <div class="confirm-buttons switch-buttons"><button id="keepRunningTimer" type="button" class="plain-button">Keep current timer</button><button id="startNewTimer" type="button" class="replace-button">Start new timer</button></div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="installModal" hidden>
+    <div class="modal install-modal" role="dialog" aria-modal="true" aria-labelledby="installTitle" tabindex="-1">
+      <div class="modal-heading"><div><span class="eyebrow eyebrow-quiet">YOUR FIRST APP</span><h2 id="installTitle">Take Still anywhere.</h2></div><button class="icon-button" id="closeInstall" type="button" aria-label="Close installation guide"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <div class="install-icon" aria-hidden="true"><img src="icon-192.png" alt=""></div>
+      <p class="install-lead">Still works without internet. Install it on your phone or computer to open it like an app.</p>
+      <div id="installAvailability" class="offline-pill"><span class="offline-dot"></span> No internet required after installation</div>
+      <div class="install-instructions">
+        <h3>How to add Still to your device</h3>
+        <p><strong>Android (Chrome):</strong> Open the hosted website, then select <em>Install app</em> or <em>Add to Home screen</em> from the browser menu.</p>
+        <p><strong>iPhone/iPad (Safari):</strong> Open the hosted website, tap <em>Share</em>, then <em>Add to Home Screen</em>.</p>
+        <p><strong>Computer (Chrome/Edge):</strong> Open the hosted website and select <em>Install</em> from the address bar or browser menu.</p>
+        <p><strong>Offline ZIP:</strong> Extract these files and double-click <code>index.html</code> whenever you want. A true installed app requires serving Still from an HTTPS website (or localhost for testing).</p>
+      </div>
+      <button class="save-button" id="installDone" type="button">Got it <svg class="icon"><use href="#i-check"/></svg></button>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./native-entry.js"></script>
+</body>
+</html>

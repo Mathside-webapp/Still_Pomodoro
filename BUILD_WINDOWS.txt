@@ -1,0 +1,37 @@
+STILL POMODORO: ANDROID APK BUILD QUICK GUIDE
+==============================================
+
+WHAT YOU NEED (free):
+  1) Node.js 22 or newer
+  2) Android Studio 2025.2.1 or newer
+  3) Android SDK API 36 in Android Studio SDK Manager
+  4) Internet on your development computer for first-time setup
+
+EXTRACT THIS ZIP, OPEN POWERSHELL IN THE PROJECT FOLDER, THEN:
+
+  npm install
+  npm run android:prepare
+  npm run android:open
+
+In Android Studio: let Gradle sync finish and choose Build > Build APK(s)
+or press Run to install on a connected Android phone.
+
+APK LOCATION:
+  android/app/build/outputs/apk/debug/app-debug.apk
+
+OPTIONAL COMMAND LINE DEBUG APK:
+  npm run android:apk
+
+AFTER CHANGING HTML/CSS/JS:
+  npm run android:sync
+
+SOUNDS IN THE BACKGROUND:
+  Still Settings > Enable background alarms
+  Android Settings > Apps > Still Pomodoro > Notifications: allow
+  Android Settings > Apps > Special app access > Alarms & reminders: allow
+
+Phone does NOT need internet to use the installed application.
+Build/dependency install DOES need internet. Lock-screen alarms may be delayed
+by Android Doze/battery restrictions even with the proper permissions.
+
+THIS DOWNLOAD IS SOURCE CODE, NOT A BUILT APK. See README.md for details.

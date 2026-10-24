@@ -1,0 +1,13 @@
+{
+  "appId": "app.still.pomodoro",
+  "appName": "Still Pomodoro",
+  "webDir": "dist",
+  "android": { "backgroundColor": "#F7F5F0", "allowMixedContent": false },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_still_notification",
+      "iconColor": "#C86B59",
+      "sound": "still_gentle.wav"
+    }
+  }
+}
