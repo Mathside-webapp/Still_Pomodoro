@@ -1,0 +1,5 @@
+npm ci
+npm run android:prepare
+cd android
+chmod +x gradlew
+./gradlew assembleDebug
